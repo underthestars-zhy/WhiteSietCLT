@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		AC39784826BB799800507B76 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC39784726BB799800507B76 /* main.swift */; };
+		AC86706526BB7E180057814D /* Shout in Frameworks */ = {isa = PBXBuildFile; productRef = AC86706426BB7E180057814D /* Shout */; };
+		AC86706726BB7F500057814D /* CommandType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC86706626BB7F500057814D /* CommandType.swift */; };
+		AC86706926BB800F0057814D /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC86706826BB800F0057814D /* Manager.swift */; };
+		AC86706C26BB83EE0057814D /* NewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC86706B26BB83EE0057814D /* NewType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +29,10 @@
 /* Begin PBXFileReference section */
 		AC39784426BB799700507B76 /* WhiteSietCLT */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WhiteSietCLT; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC39784726BB799800507B76 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		AC86706626BB7F500057814D /* CommandType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandType.swift; sourceTree = "<group>"; };
+		AC86706826BB800F0057814D /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
+		AC86706A26BB805E0057814D /* Shout */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Shout; path = ../Shout; sourceTree = "<group>"; };
+		AC86706B26BB83EE0057814D /* NewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC86706526BB7E180057814D /* Shout in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,8 +50,10 @@
 		AC39783B26BB799700507B76 = {
 			isa = PBXGroup;
 			children = (
+				AC86706126BB7D0B0057814D /* Packages */,
 				AC39784626BB799700507B76 /* WhiteSietCLT */,
 				AC39784526BB799700507B76 /* Products */,
+				AC86706326BB7E180057814D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,8 +69,26 @@
 			isa = PBXGroup;
 			children = (
 				AC39784726BB799800507B76 /* main.swift */,
+				AC86706826BB800F0057814D /* Manager.swift */,
+				AC86706626BB7F500057814D /* CommandType.swift */,
+				AC86706B26BB83EE0057814D /* NewType.swift */,
 			);
 			path = WhiteSietCLT;
+			sourceTree = "<group>";
+		};
+		AC86706126BB7D0B0057814D /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				AC86706A26BB805E0057814D /* Shout */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		AC86706326BB7E180057814D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -78,6 +107,9 @@
 			dependencies = (
 			);
 			name = WhiteSietCLT;
+			packageProductDependencies = (
+				AC86706426BB7E180057814D /* Shout */,
+			);
 			productName = WhiteSietCLT;
 			productReference = AC39784426BB799700507B76 /* WhiteSietCLT */;
 			productType = "com.apple.product-type.tool";
@@ -106,6 +138,8 @@
 				Base,
 			);
 			mainGroup = AC39783B26BB799700507B76;
+			packageReferences = (
+			);
 			productRefGroup = AC39784526BB799700507B76 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -120,7 +154,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC86706C26BB83EE0057814D /* NewType.swift in Sources */,
 				AC39784826BB799800507B76 /* main.swift in Sources */,
+				AC86706926BB800F0057814D /* Manager.swift in Sources */,
+				AC86706726BB7F500057814D /* CommandType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +323,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AC86706426BB7E180057814D /* Shout */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Shout;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AC39783C26BB799700507B76 /* Project object */;
 }
