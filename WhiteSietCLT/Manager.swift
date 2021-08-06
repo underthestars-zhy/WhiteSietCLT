@@ -8,6 +8,7 @@
 import Foundation
 import Shout
 import Darwin
+import Regex
 
 class Manager {
     static let share = Manager()
@@ -43,15 +44,23 @@ class Manager {
         
     }
     
-    // MARK: - Creat
+    // MARK: - Creat Server
     
     private func creatServer() {
         print("(*) Representative must fill in, others can be skipped")
         printSplitLine()
         
+        guard var config = ServerConfig() else { fatalError("internal error #2") }
+        
         print("Server Name(*): ", terminator: "")
         guard let serverName = readLine() else { fatalError("Unavailable: serverName") }
         guard checkServerNameRepeat(serverName) else { fatalError("serverName") }
+        config.serverName = serverName
+        
+        print("IP(*): ", terminator: "")
+        guard let ip = readLine() else { fatalError("Unavailable: IP") }
+        guard checkIP(ip) else { fatalError("The ip adress is wrong") }
+        config.ip = ip
     }
     
     private func checkServerNameRepeat(_ name: String) -> Bool {
@@ -71,6 +80,13 @@ class Manager {
             fatalError(error.localizedDescription)
         }
     }
+    
+    private func checkIP(_ ip: String) -> Bool {
+        let result =  ip !~ #"^((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}$"#
+        return !result
+    }
+    
+    // MARK: - Creat Config
     
     func creatConfig() {
         // TODO: Creat config file

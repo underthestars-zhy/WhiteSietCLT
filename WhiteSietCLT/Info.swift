@@ -8,5 +8,6 @@
 import Foundation
 
 struct Info {
-    static let vesion = "1.0.0"
+    static let version = "1.0.0"
+    static let serverConfigVersion = "1.0.0"
 }

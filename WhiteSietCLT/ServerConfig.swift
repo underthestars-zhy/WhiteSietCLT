@@ -9,18 +9,20 @@ import Foundation
 import ObjectMapper
 
 struct ServerConfig: Mappable {
-    var version: String = Info.vesion
+    var version: String = Info.serverConfigVersion
     var serverName: String!
+    var ip: String!
     
     
     init?(map: Map) { }
     
-    convenience init() {
-        self.init(map: Map(mappingType: .toJSON, JSON: [:]))
+    init?() {
+        self.init(map: Map(mappingType: .fromJSON, JSON: ["version" : Info.serverConfigVersion]))
     }
     
     mutating func mapping(map: Map) {
         version <- map["version"]
         serverName <- map["serverName"]
+        ip <- map["ip"]
     }
 }

@@ -16,6 +16,7 @@
 		ACEDA85326BCC21900D9C5F3 /* ObjectMapper in Frameworks */ = {isa = PBXBuildFile; productRef = ACEDA85226BCC21900D9C5F3 /* ObjectMapper */; };
 		ACEDA85526BCC23900D9C5F3 /* ServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEDA85426BCC23900D9C5F3 /* ServerConfig.swift */; };
 		ACEDA85726BCC34A00D9C5F3 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEDA85626BCC34A00D9C5F3 /* Info.swift */; };
+		ACEDA85A26BCC7A500D9C5F3 /* Regex in Frameworks */ = {isa = PBXBuildFile; productRef = ACEDA85926BCC7A500D9C5F3 /* Regex */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACEDA85A26BCC7A500D9C5F3 /* Regex in Frameworks */,
 				ACEDA85326BCC21900D9C5F3 /* ObjectMapper in Frameworks */,
 				AC86706526BB7E180057814D /* Shout in Frameworks */,
 			);
@@ -121,6 +123,7 @@
 			packageProductDependencies = (
 				AC86706426BB7E180057814D /* Shout */,
 				ACEDA85226BCC21900D9C5F3 /* ObjectMapper */,
+				ACEDA85926BCC7A500D9C5F3 /* Regex */,
 			);
 			productName = WhiteSietCLT;
 			productReference = AC39784426BB799700507B76 /* WhiteSietCLT */;
@@ -152,6 +155,7 @@
 			mainGroup = AC39783B26BB799700507B76;
 			packageReferences = (
 				ACEDA85126BCC21900D9C5F3 /* XCRemoteSwiftPackageReference "ObjectMapper" */,
+				ACEDA85826BCC7A500D9C5F3 /* XCRemoteSwiftPackageReference "Regex" */,
 			);
 			productRefGroup = AC39784526BB799700507B76 /* Products */;
 			projectDirPath = "";
@@ -349,6 +353,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		ACEDA85826BCC7A500D9C5F3 /* XCRemoteSwiftPackageReference "Regex" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/crossroadlabs/Regex";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -360,6 +372,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ACEDA85126BCC21900D9C5F3 /* XCRemoteSwiftPackageReference "ObjectMapper" */;
 			productName = ObjectMapper;
+		};
+		ACEDA85926BCC7A500D9C5F3 /* Regex */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ACEDA85826BCC7A500D9C5F3 /* XCRemoteSwiftPackageReference "Regex" */;
+			productName = Regex;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
