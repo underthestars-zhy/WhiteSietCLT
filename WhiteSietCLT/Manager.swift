@@ -7,27 +7,12 @@
 
 import Foundation
 import Shout
+import Darwin
 
 class Manager {
     static let share = Manager()
     
-    let fileManager = FileManager.default
-    let userDataPath = { () -> URL in
-        if let libraryURL = FileManager.default.urls(for: .libraryDirectory, in: .allDomainsMask).first {
-            let dataURL = libraryURL.appendingPathComponent("WhiteSiteCLT", isDirectory: true)
-            if !FileManager.default.fileExists(atPath: dataURL.path) {
-                do {
-                    try FileManager.default.createDirectory(at: dataURL, withIntermediateDirectories: false)
-                } catch {
-                    fatalError(error.localizedDescription)
-                }
-            }
-            
-            return dataURL
-        } else {
-            fatalError("Cannot get user data url(path)")
-        }
-    }()
+    var w = winsize()
     
     init() {
         
@@ -60,11 +45,45 @@ class Manager {
     
     // MARK: - Creat
     
-    func creatServer() {
+    private func creatServer() {
+        print("(*) Representative must fill in, others can be skipped")
+        printSplitLine()
         
+        print("Server Name(*): ", terminator: "")
+        guard let serverName = readLine() else { fatalError("Unavailable: serverName") }
+        guard checkServerNameRepeat(serverName) else { fatalError("serverName") }
+    }
+    
+    private func checkServerNameRepeat(_ name: String) -> Bool {
+        do {
+            let configURLs = try FileHelper.fileManager.contentsOfDirectory(atPath: FileHelper.share.userServerConfigURL.path)
+            for path in configURLs {
+                guard let url = URL(string: path) else { fatalError("internal error #1") }
+                let fileName = (url.path as NSString).deletingPathExtension as String
+                if name.trimmingCharacters(in: .whitespaces) == fileName.trimmingCharacters(in: .whitespaces) {
+                    print(url.pathExtension.trimmingCharacters(in: .whitespaces))
+                    return false
+                }
+            }
+            
+            return true
+        } catch {
+            fatalError(error.localizedDescription)
+        }
     }
     
     func creatConfig() {
         // TODO: Creat config file
     }
+    
+    // MARK: - Tool
+    
+    private func printSplitLine(_ text: String = "=") {
+        if ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == 0 {
+            for _ in 0..<w.ws_col { print(text, terminator: "") }
+            print("")
+        }
+    }
 }
+
+
