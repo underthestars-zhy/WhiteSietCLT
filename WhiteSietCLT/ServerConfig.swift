@@ -12,6 +12,10 @@ struct ServerConfig: Mappable {
     var version: String = Info.serverConfigVersion
     var serverName: String!
     var ip: String!
+    var userName: String!
+    var password: String!
+    var port: Int32!
+    var system: System!
     
     
     init?(map: Map) { }
@@ -24,5 +28,15 @@ struct ServerConfig: Mappable {
         version <- map["version"]
         serverName <- map["serverName"]
         ip <- map["ip"]
+        userName <- map["userName"]
+        password <- map["password"]
+        port <- map["port"]
+        system <- map["system"]
     }
+}
+
+enum System: String {
+    case centos = "centos"
+    case debian = "debian"
+    case ubuntu = "ubuntu"
 }

@@ -25,10 +25,8 @@ class Manager {
         guard let type = NewType(rawValue: argument) else { fatalError("Invalid instruction") }
         
         switch type {
-        case .server:
-            creatServer()
-        case .config:
-            creatConfig()
+        case .server: creatServer()
+        case .config: creatConfig()
         }
     }
     
@@ -47,20 +45,53 @@ class Manager {
     // MARK: - Creat Server
     
     private func creatServer() {
-        print("(*) Representative must fill in, others can be skipped")
+        print("(*) representative must fill in, others can be skipped ; (default: xxx) means it is optional, you can just press enter to skip")
+        
         printSplitLine()
         
         guard var config = ServerConfig() else { fatalError("internal error #2") }
         
         print("Server Name(*): ", terminator: "")
-        guard let serverName = readLine() else { fatalError("Unavailable: serverName") }
+        guard let serverName = readLine(), serverName != "" else { fatalError("Unavailable: Server Name") }
         guard checkServerNameRepeat(serverName) else { fatalError("serverName") }
         config.serverName = serverName
         
         print("IP(*): ", terminator: "")
-        guard let ip = readLine() else { fatalError("Unavailable: IP") }
+        guard let ip = readLine(), ip != "" else { fatalError("Unavailable: IP") }
         guard checkIP(ip) else { fatalError("The ip adress is wrong") }
         config.ip = ip
+        
+        print("User Name(*): ", terminator: "")
+        guard let userName = readLine(), userName != "" else { fatalError("Unavailable User Name") }
+        config.userName = userName
+        
+        print("Password(*): ", terminator: "")
+        guard let password = readLine(), password != "" else { fatalError("Unavailable Password") }
+        config.password = password
+        
+        print("Port(default: 22): ", terminator: "")
+        guard let port = Int32(readLine() == "" ? "22" : readLine() ?? "22") else { fatalError("Unavailable Port") }
+        config.port = port
+        
+        printSplitLine()
+        
+        print("Try to connect...")
+        config.system = tryConnect(ip: ip, name: userName, pwd: password, port: port)
+        print("=> Your server system is \(config.system.rawValue)")
+        
+        printSplitLine()
+        
+        print("Start update package...")
+        let id = ProgressHelper.share.creatProgress { self.printPointProgress($0) }
+        self.updatePM(ip: ip, name: userName, pwd: password, port: port, system: config.system)
+        ProgressHelper.share.stopProgress(id)
+        ProgressHelper.share.join(id)
+        
+        printSplitLine()
+        
+        FileHelper.share.writeServerConfig(config)
+        
+        print("Successfully created")
     }
     
     private func checkServerNameRepeat(_ name: String) -> Bool {
@@ -82,8 +113,34 @@ class Manager {
     }
     
     private func checkIP(_ ip: String) -> Bool {
-        let result =  ip !~ #"^((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}$"#
+        let result =  ip !~ #"^((25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))\.){3}(25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))$"#
         return !result
+    }
+    
+    private func tryConnect(ip: String, name: String, pwd: String, port: Int32) -> System {
+        do {
+            let ssh = try SSH(host: ip, port: port)
+            try ssh.authenticate(username: name, password: pwd)
+            
+            let (_, lsbOutput) = try ssh.capture(#"find /etc -name "lsb-release""#)
+            if lsbOutput.trimmingCharacters(in: .whitespacesAndNewlines) == "/etc/lsb-release" {
+                return .ubuntu
+            }
+            
+            let (_, centosOutput) = try ssh.capture(#"find /etc -name "centos-release""#)
+            if centosOutput.trimmingCharacters(in: .whitespacesAndNewlines) == "/etc/centos-release" {
+                return .centos
+            }
+            
+            let (_, debianOutput) = try ssh.capture(#"find /etc -name "debian_version""#)
+            if debianOutput.trimmingCharacters(in: .whitespacesAndNewlines) == "/etc/debian_version" {
+                return .debian
+            }
+            
+            fatalError("Your system is not supported")
+        } catch {
+            fatalError(error.localizedDescription)
+        }
     }
     
     // MARK: - Creat Config
@@ -98,6 +155,37 @@ class Manager {
         if ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == 0 {
             for _ in 0..<w.ws_col { print(text, terminator: "") }
             print("")
+        }
+    }
+    
+    private func printPointProgress(_ id: UUID) {
+        while ProgressHelper.share.state(id) {
+            ProgressHelper.share.wait(id)
+            sleep(1)
+            print(".", terminator: "")
+            fflush(stdout)
+            sleep(1)
+            print("\u{0008} \u{0008}", terminator: "")
+            fflush(stdout)
+            ProgressHelper.share.stopWait(id)
+        }
+    }
+    
+    // MARK: - PM
+    
+    private func updatePM(ip: String, name: String, pwd: String, port: Int32, system: System) {
+        do {
+            let ssh = try SSH(host: ip, port: port)
+            try ssh.authenticate(username: name, password: pwd)
+            
+            if system == .centos {
+                (_, _) = try ssh.capture("yum -y update")
+            } else {
+                (_, _) = try ssh.capture("apt-get update")
+                (_, _) = try ssh.capture("apt-get dist-upgrade -y")
+            }
+        } catch {
+            fatalError(error.localizedDescription)
         }
     }
 }

@@ -61,4 +61,8 @@ class FileHelper {
     }
     
     init() {}
+    
+    func writeServerConfig(_ config: ServerConfig) {
+        fileManager.createFile(atPath: userServerConfigURL.appendingPathComponent("\(config.serverName!).json").path, contents: config.toJSONString()?.data(using: .utf8), attributes: nil)
+    }
 }
