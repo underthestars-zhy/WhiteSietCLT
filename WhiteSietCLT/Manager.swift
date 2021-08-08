@@ -92,11 +92,8 @@ class Manager {
         
         printSplitLine()
         
-        print("Start update package...")
-        let id = ProgressHelper.share.creatProgress { self.printPointProgress($0) }
-        self.updatePM(ip: ip, name: userName, pwd: password, port: port, system: config.system)
-        ProgressHelper.share.stopProgress(id)
-        ProgressHelper.share.join(id)
+        let pm = PackagesManager(serverName)
+        pm.updatePM(false)
         
         printSplitLine()
         
@@ -194,37 +191,6 @@ class Manager {
         if ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == 0 {
             for _ in 0..<w.ws_col { print(text, terminator: "") }
             print("")
-        }
-    }
-    
-    private func printPointProgress(_ id: UUID) {
-        while ProgressHelper.share.state(id) {
-            ProgressHelper.share.wait(id)
-            sleep(1)
-            print(".", terminator: "")
-            fflush(stdout)
-            sleep(1)
-            print("\u{0008} \u{0008}", terminator: "")
-            fflush(stdout)
-            ProgressHelper.share.stopWait(id)
-        }
-    }
-    
-    // MARK: - PM
-    
-    private func updatePM(ip: String, name: String, pwd: String, port: Int32, system: System) {
-        do {
-            let ssh = try SSH(host: ip, port: port)
-            try ssh.authenticate(username: name, password: pwd)
-            
-            if system == .centos {
-                (_, _) = try ssh.capture("yum -y update")
-            } else {
-                (_, _) = try ssh.capture("apt-get update")
-                (_, _) = try ssh.capture("apt-get dist-upgrade -y")
-            }
-        } catch {
-            fatalError(error.localizedDescription)
         }
     }
 }

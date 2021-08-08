@@ -18,6 +18,7 @@
 		ACEDA85726BCC34A00D9C5F3 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEDA85626BCC34A00D9C5F3 /* Info.swift */; };
 		ACEDA85A26BCC7A500D9C5F3 /* Regex in Frameworks */ = {isa = PBXBuildFile; productRef = ACEDA85926BCC7A500D9C5F3 /* Regex */; };
 		ACEDA85C26BD7B0300D9C5F3 /* ProgressHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEDA85B26BD7B0300D9C5F3 /* ProgressHelper.swift */; };
+		ACFE888C26BF746000012CBD /* PackagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFE888B26BF746000012CBD /* PackagesManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +44,7 @@
 		ACEDA85426BCC23900D9C5F3 /* ServerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfig.swift; sourceTree = "<group>"; };
 		ACEDA85626BCC34A00D9C5F3 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		ACEDA85B26BD7B0300D9C5F3 /* ProgressHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHelper.swift; sourceTree = "<group>"; };
+		ACFE888B26BF746000012CBD /* PackagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackagesManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			children = (
 				AC39784726BB799800507B76 /* main.swift */,
 				AC86706826BB800F0057814D /* Manager.swift */,
+				ACFE888B26BF746000012CBD /* PackagesManager.swift */,
 				AC86706D26BBA8080057814D /* FileHelper.swift */,
 				AC86706626BB7F500057814D /* CommandType.swift */,
 				AC86706B26BB83EE0057814D /* NewType.swift */,
@@ -174,6 +177,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACFE888C26BF746000012CBD /* PackagesManager.swift in Sources */,
 				AC86706E26BBA8080057814D /* FileHelper.swift in Sources */,
 				AC86706C26BB83EE0057814D /* NewType.swift in Sources */,
 				AC39784826BB799800507B76 /* main.swift in Sources */,
