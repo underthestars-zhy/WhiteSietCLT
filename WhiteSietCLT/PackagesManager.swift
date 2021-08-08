@@ -23,11 +23,9 @@ class PackagesManager {
     func updatePM(_ showInfo: Bool) {
         print("Start update package...")
         let id = ProgressHelper.share.creatProgress { self.printPointProgress($0) }
-        ProgressHelper.share.stopProgress(id)
-        ProgressHelper.share.join(id)
         
         do {
-            let ssh = try SSH(host: serverConfig.serverName, port: serverConfig.port)
+            let ssh = try SSH(host: serverConfig.ip, port: serverConfig.port)
             try ssh.authenticate(username: serverConfig.userName, password: serverConfig.password)
             
             if serverConfig.system == .centos {
@@ -48,6 +46,9 @@ class PackagesManager {
         } catch {
             fatalError(error.localizedDescription)
         }
+        
+        ProgressHelper.share.stopProgress(id)
+        ProgressHelper.share.join(id)
     }
     
     // MARK: - Tool

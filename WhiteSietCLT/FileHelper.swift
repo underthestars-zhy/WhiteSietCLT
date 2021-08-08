@@ -44,7 +44,7 @@ class FileHelper {
             if let _userServerConfigURL = _userServerConfigURL {
                 return _userServerConfigURL
             } else {
-                let configURL = userDataURL.appendingPathComponent("serve_config", isDirectory: true)
+                let configURL = userDataURL.appendingPathComponent("server_config", isDirectory: true)
                 
                 if !fileManager.fileExists(atPath: configURL.path) {
                     do {
