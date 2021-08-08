@@ -65,4 +65,12 @@ class FileHelper {
     func writeServerConfig(_ config: ServerConfig) {
         fileManager.createFile(atPath: userServerConfigURL.appendingPathComponent("\(config.serverName!).json").path, contents: config.toJSONString()?.data(using: .utf8), attributes: nil)
     }
+    
+    func removeServerConfig(_ serverName: String) {
+        do {
+            try fileManager.removeItem(at: self.userServerConfigURL.appendingPathComponent(serverName + ".json"))
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
 }

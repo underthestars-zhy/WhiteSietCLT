@@ -11,7 +11,7 @@
 		AC86706526BB7E180057814D /* Shout in Frameworks */ = {isa = PBXBuildFile; productRef = AC86706426BB7E180057814D /* Shout */; };
 		AC86706726BB7F500057814D /* CommandType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC86706626BB7F500057814D /* CommandType.swift */; };
 		AC86706926BB800F0057814D /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC86706826BB800F0057814D /* Manager.swift */; };
-		AC86706C26BB83EE0057814D /* NewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC86706B26BB83EE0057814D /* NewType.swift */; };
+		AC86706C26BB83EE0057814D /* EexcuteType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC86706B26BB83EE0057814D /* EexcuteType.swift */; };
 		AC86706E26BBA8080057814D /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC86706D26BBA8080057814D /* FileHelper.swift */; };
 		ACEDA85326BCC21900D9C5F3 /* ObjectMapper in Frameworks */ = {isa = PBXBuildFile; productRef = ACEDA85226BCC21900D9C5F3 /* ObjectMapper */; };
 		ACEDA85526BCC23900D9C5F3 /* ServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEDA85426BCC23900D9C5F3 /* ServerConfig.swift */; };
@@ -19,6 +19,7 @@
 		ACEDA85A26BCC7A500D9C5F3 /* Regex in Frameworks */ = {isa = PBXBuildFile; productRef = ACEDA85926BCC7A500D9C5F3 /* Regex */; };
 		ACEDA85C26BD7B0300D9C5F3 /* ProgressHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEDA85B26BD7B0300D9C5F3 /* ProgressHelper.swift */; };
 		ACFE888C26BF746000012CBD /* PackagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFE888B26BF746000012CBD /* PackagesManager.swift */; };
+		ACFE889626BFE27A00012CBD /* SwiftRandom in Frameworks */ = {isa = PBXBuildFile; productRef = ACFE889526BFE27A00012CBD /* SwiftRandom */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,7 +40,7 @@
 		AC86706626BB7F500057814D /* CommandType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandType.swift; sourceTree = "<group>"; };
 		AC86706826BB800F0057814D /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		AC86706A26BB805E0057814D /* Shout */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Shout; path = ../Shout; sourceTree = "<group>"; };
-		AC86706B26BB83EE0057814D /* NewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewType.swift; sourceTree = "<group>"; };
+		AC86706B26BB83EE0057814D /* EexcuteType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EexcuteType.swift; sourceTree = "<group>"; };
 		AC86706D26BBA8080057814D /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		ACEDA85426BCC23900D9C5F3 /* ServerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfig.swift; sourceTree = "<group>"; };
 		ACEDA85626BCC34A00D9C5F3 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
@@ -53,6 +54,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACEDA85A26BCC7A500D9C5F3 /* Regex in Frameworks */,
+				ACFE889626BFE27A00012CBD /* SwiftRandom in Frameworks */,
 				ACEDA85326BCC21900D9C5F3 /* ObjectMapper in Frameworks */,
 				AC86706526BB7E180057814D /* Shout in Frameworks */,
 			);
@@ -87,7 +89,7 @@
 				ACFE888B26BF746000012CBD /* PackagesManager.swift */,
 				AC86706D26BBA8080057814D /* FileHelper.swift */,
 				AC86706626BB7F500057814D /* CommandType.swift */,
-				AC86706B26BB83EE0057814D /* NewType.swift */,
+				AC86706B26BB83EE0057814D /* EexcuteType.swift */,
 				ACEDA85426BCC23900D9C5F3 /* ServerConfig.swift */,
 				ACEDA85626BCC34A00D9C5F3 /* Info.swift */,
 				ACEDA85B26BD7B0300D9C5F3 /* ProgressHelper.swift */,
@@ -130,6 +132,7 @@
 				AC86706426BB7E180057814D /* Shout */,
 				ACEDA85226BCC21900D9C5F3 /* ObjectMapper */,
 				ACEDA85926BCC7A500D9C5F3 /* Regex */,
+				ACFE889526BFE27A00012CBD /* SwiftRandom */,
 			);
 			productName = WhiteSietCLT;
 			productReference = AC39784426BB799700507B76 /* WhiteSietCLT */;
@@ -162,6 +165,7 @@
 			packageReferences = (
 				ACEDA85126BCC21900D9C5F3 /* XCRemoteSwiftPackageReference "ObjectMapper" */,
 				ACEDA85826BCC7A500D9C5F3 /* XCRemoteSwiftPackageReference "Regex" */,
+				ACFE889426BFE27A00012CBD /* XCRemoteSwiftPackageReference "SwiftRandom" */,
 			);
 			productRefGroup = AC39784526BB799700507B76 /* Products */;
 			projectDirPath = "";
@@ -179,7 +183,7 @@
 			files = (
 				ACFE888C26BF746000012CBD /* PackagesManager.swift in Sources */,
 				AC86706E26BBA8080057814D /* FileHelper.swift in Sources */,
-				AC86706C26BB83EE0057814D /* NewType.swift in Sources */,
+				AC86706C26BB83EE0057814D /* EexcuteType.swift in Sources */,
 				AC39784826BB799800507B76 /* main.swift in Sources */,
 				AC86706926BB800F0057814D /* Manager.swift in Sources */,
 				ACEDA85C26BD7B0300D9C5F3 /* ProgressHelper.swift in Sources */,
@@ -369,6 +373,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		ACFE889426BFE27A00012CBD /* XCRemoteSwiftPackageReference "SwiftRandom" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/iamjono/SwiftRandom";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -385,6 +397,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ACEDA85826BCC7A500D9C5F3 /* XCRemoteSwiftPackageReference "Regex" */;
 			productName = Regex;
+		};
+		ACFE889526BFE27A00012CBD /* SwiftRandom */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ACFE889426BFE27A00012CBD /* XCRemoteSwiftPackageReference "SwiftRandom" */;
+			productName = SwiftRandom;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -24,6 +24,8 @@ class PackagesManager {
         print("Start update package...")
         let id = ProgressHelper.share.creatProgress { self.printPointProgress($0) }
         
+        // TODO: Stop use control-c to broke the clt
+        
         do {
             let ssh = try SSH(host: serverConfig.ip, port: serverConfig.port)
             try ssh.authenticate(username: serverConfig.userName, password: serverConfig.password)
@@ -60,7 +62,7 @@ class PackagesManager {
             print(".", terminator: "")
             fflush(stdout)
             sleep(1)
-            print("\u{0008} \u{0008}", terminator: "")
+            print("\u{0008} \u{0008} \u{001B}[1C", terminator: "")
             fflush(stdout)
             ProgressHelper.share.stopWait(id)
         }

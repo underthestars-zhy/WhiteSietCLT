@@ -9,6 +9,7 @@ import Foundation
 import Shout
 import Darwin
 import Regex
+import SwiftRandom
 
 class Manager {
     static let share = Manager()
@@ -22,7 +23,7 @@ class Manager {
     // MARK: - Instruction processing
     
     func new(with argument: String) {
-        guard let type = NewType(rawValue: argument) else { fatalError("Invalid instruction") }
+        guard let type = EexcuteType(rawValue: argument) else { fatalError("Invalid instruction") }
         
         switch type {
         case .server: creatServer()
@@ -30,8 +31,13 @@ class Manager {
         }
     }
     
-    func remove() {
+    func remove(with argument: String) {
+        guard let type = EexcuteType(rawValue: argument) else { fatalError("Invalid instruction") }
         
+        switch type {
+        case .server: removeServer()
+        case .config: removeConfig()
+        }
     }
     
     func edit() {
@@ -43,7 +49,7 @@ class Manager {
     }
     
     func list(for argument: String) {
-        guard let type = NewType(rawValue: argument) else { fatalError("Invalid instruction") }
+        guard let type = EexcuteType(rawValue: argument) else { fatalError("Invalid instruction") }
         
         switch type {
         case .server: listServer()
@@ -107,7 +113,6 @@ class Manager {
                 guard let url = URL(string: path) else { fatalError("internal error #1") }
                 let fileName = (url.path as NSString).deletingPathExtension as String
                 if name.trimmingCharacters(in: .whitespaces) == fileName.trimmingCharacters(in: .whitespaces) {
-                    print(url.pathExtension.trimmingCharacters(in: .whitespaces))
                     return false
                 }
             }
@@ -185,12 +190,55 @@ class Manager {
         // TODO: List Config
     }
     
+    // MARK: - Remove Server
+    
+    func removeServer() {
+        print("Server Name: ", terminator: "")
+        guard let serverName = readLine(), serverName != "" else { fatalError("Server Name is incorrect") }
+        print("\u{001B}[0;31m=> You are making a dangerous manoeuvre: deleting your server data\u{001B}[0m")
+        print("Continue(Y/\u{001B}[0;32mN\u{001B}[0m): ", terminator: "")
+        guard let input = readLine(), input != "" else { fatalError("Input is incorrect") }
+        guard input == "Y" else { return }
+        guard !checkServerNameRepeat(serverName) else { fatalError("Cannot find the server name") }
+        guard mathTest() else {
+            print("Calculation error")
+            return
+        }
+        FileHelper.share.removeServerConfig(serverName)
+        
+        printSplitLine()
+        
+        print("Done.")
+    }
+    
+    // MARK: - Remove Config
+    
+    func removeConfig() {
+        // TODO: Remove Config
+    }
+    
     // MARK: - Tool
     
     private func printSplitLine(_ text: String = "=") {
         if ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == 0 {
             for _ in 0..<w.ws_col { print(text, terminator: "") }
             print("")
+        }
+    }
+    
+    func mathTest() -> Bool {
+        let num1 = Int.random(in: 1...10000)
+        let num2 = Int.random(in: -10000...10000)
+        if num2 < 0 {
+            print("Real Person Test: \(num1) + (\(num2)) = ", terminator: "")
+            guard let input = readLine(), input != "" else { fatalError("Input is incorrect") }
+            let result = Int(input)
+            return result == num1 + num2
+        } else {
+            print("Real Person Test: \(num1) + \(num2) = ", terminator: "")
+            guard let input = readLine(), input != "" else { fatalError("Input is incorrect") }
+            let result = Int(input)
+            return result == num1 + num2
         }
     }
 }

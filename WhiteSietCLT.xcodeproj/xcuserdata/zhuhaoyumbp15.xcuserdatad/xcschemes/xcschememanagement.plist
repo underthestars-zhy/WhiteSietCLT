@@ -7,7 +7,12 @@
 		<key>WhiteSietCLT - List Server.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>1</integer>
+		</dict>
+		<key>WhiteSietCLT - Remove Server.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
 		</dict>
 		<key>WhiteSietCLT.xcscheme_^#shared#^_</key>
 		<dict>

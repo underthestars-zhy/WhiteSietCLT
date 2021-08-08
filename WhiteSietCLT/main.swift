@@ -7,22 +7,20 @@
 
 import Foundation
 
-guard CommandLine.arguments.count >= 2 else { fatalError("Wrong arguments number") }
+guard CommandLine.arguments.count == 3 else { fatalError("Wrong arguments number") }
 
 guard let command = CommandType(rawValue: CommandLine.arguments[1]) else { fatalError("Cannot Parsing Command") }
 
 switch command {
 case .new:
-    guard CommandLine.arguments.count == 3 else { fatalError("Wrong arguments number") }
     Manager.share.new(with: CommandLine.arguments[2])
 case .remove:
-    Manager.share.open()
+    Manager.share.remove(with: CommandLine.arguments[2])
 case .edit:
     Manager.share.edit()
 case .open:
     Manager.share.open()
 case .list:
-    guard CommandLine.arguments.count == 3 else { fatalError("Wrong arguments number") }
     Manager.share.list(for: CommandLine.arguments[2])
 }
 
