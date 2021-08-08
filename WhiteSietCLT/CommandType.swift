@@ -12,4 +12,5 @@ enum CommandType: String {
     case remove = "remove"
     case edit = "edit"
     case `open` = "open"
+    case list = "list"
 }

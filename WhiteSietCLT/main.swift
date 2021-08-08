@@ -21,5 +21,8 @@ case .edit:
     Manager.share.edit()
 case .open:
     Manager.share.open()
+case .list:
+    guard CommandLine.arguments.count == 3 else { fatalError("Wrong arguments number") }
+    Manager.share.list(for: CommandLine.arguments[2])
 }
 

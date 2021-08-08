@@ -42,6 +42,15 @@ class Manager {
         
     }
     
+    func list(for argument: String) {
+        guard let type = NewType(rawValue: argument) else { fatalError("Invalid instruction") }
+        
+        switch type {
+        case .server: listServer()
+        case .config: listConfig()
+        }
+    }
+    
     // MARK: - Creat Server
     
     private func creatServer() {
@@ -79,6 +88,8 @@ class Manager {
         config.system = tryConnect(ip: ip, name: userName, pwd: password, port: port)
         print("=> Your server system is \(config.system.rawValue)")
         
+        FileHelper.share.writeServerConfig(config)
+        
         printSplitLine()
         
         print("Start update package...")
@@ -88,8 +99,6 @@ class Manager {
         ProgressHelper.share.join(id)
         
         printSplitLine()
-        
-        FileHelper.share.writeServerConfig(config)
         
         print("Successfully created")
     }
@@ -147,6 +156,36 @@ class Manager {
     
     func creatConfig() {
         // TODO: Creat config file
+    }
+    
+    // MARK: - List Server
+    
+    func listServer() {
+        printSplitLine()
+        
+        do {
+            let configURLs = try FileHelper.fileManager.contentsOfDirectory(atPath: FileHelper.share.userServerConfigURL.path)
+            let spaces = String(repeating: " ", count: abs(Int(w.ws_col) - 13))
+            let title = "Server Name\(spaces)IP"
+            print(title)
+            
+            for path in configURLs {
+                guard (path as NSString).pathExtension == "json" else { continue }
+                guard let config = ServerConfig(JSONString: try String(contentsOf: FileHelper.share.userServerConfigURL.appendingPathComponent(path))) else { fatalError("\(path) is broken") }
+                guard let name = config.serverName else { fatalError("\(path) is broken") }
+                guard let ip = config.ip else { fatalError("\(path) is broken") }
+                let sp = String(repeating: " ", count: abs(Int(w.ws_col) - name.count - ip.count))
+                print("\(name)\(sp)\(ip)")
+            }
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+    
+    // MARK: - List Config
+    
+    func listConfig() {
+        // TODO: List Config
     }
     
     // MARK: - Tool

@@ -43,4 +43,9 @@ class ProgressHelper {
             sleep(refreshTiem)
         }
     }
+    
+    func skip(_ id: UUID) {
+        self.stopProgress(id)
+        self.join(id)
+    }
 }
