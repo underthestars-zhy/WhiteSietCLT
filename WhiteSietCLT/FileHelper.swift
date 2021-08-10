@@ -73,4 +73,13 @@ class FileHelper {
             fatalError(error.localizedDescription)
         }
     }
+    
+    func getServerConfig(_ serverName: String) -> ServerConfig {
+        do {
+            guard let config = ServerConfig(JSONString: try String(contentsOf: self.userServerConfigURL.appendingPathComponent(serverName + ".json"))) else { fatalError("The json file is broken") }
+            return config
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
 }

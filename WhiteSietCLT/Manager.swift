@@ -40,8 +40,13 @@ class Manager {
         }
     }
     
-    func edit() {
+    func edit(with argument: String) {
+        guard let type = EexcuteType(rawValue: argument) else { fatalError("Invalid instruction") }
         
+        switch type {
+        case .server: editServer()
+        case .config: editConfig()
+        }
     }
     
     func `open`() {
@@ -99,7 +104,7 @@ class Manager {
         printSplitLine()
         
         let pm = PackagesManager(serverName)
-        pm.updatePM(false)
+        pm.updatePM(false, isCreatServer: true)
         
         printSplitLine()
         
@@ -156,13 +161,13 @@ class Manager {
     
     // MARK: - Creat Config
     
-    func creatConfig() {
+    private func creatConfig() {
         // TODO: Creat config file
     }
     
     // MARK: - List Server
     
-    func listServer() {
+    private func listServer() {
         printSplitLine()
         
         do {
@@ -173,7 +178,7 @@ class Manager {
             
             for path in configURLs {
                 guard (path as NSString).pathExtension == "json" else { continue }
-                guard let config = ServerConfig(JSONString: try String(contentsOf: FileHelper.share.userServerConfigURL.appendingPathComponent(path))) else { fatalError("\(path) is broken") }
+                let config = FileHelper.share.getServerConfig((path as NSString).deletingPathExtension)
                 guard let name = config.serverName else { fatalError("\(path) is broken") }
                 guard let ip = config.ip else { fatalError("\(path) is broken") }
                 let sp = String(repeating: " ", count: abs(Int(w.ws_col) - name.count - ip.count))
@@ -186,13 +191,13 @@ class Manager {
     
     // MARK: - List Config
     
-    func listConfig() {
+    private func listConfig() {
         // TODO: List Config
     }
     
     // MARK: - Remove Server
     
-    func removeServer() {
+    private func removeServer() {
         print("Server Name: ", terminator: "")
         guard let serverName = readLine(), serverName != "" else { fatalError("Server Name is incorrect") }
         print("\u{001B}[0;31m=> You are making a dangerous manoeuvre: deleting your server data\u{001B}[0m")
@@ -213,8 +218,45 @@ class Manager {
     
     // MARK: - Remove Config
     
-    func removeConfig() {
+    private func removeConfig() {
         // TODO: Remove Config
+    }
+    
+    // MARK: - Edit Server
+    
+    private func editServer() {
+        print("Server Name: ", terminator: "")
+        guard let serverName = readLine(), serverName != "" else { fatalError("Server Name is incorrect") }
+        print("\u{001B}[0;31m=> You are modifying the Server data\u{001B}[0m")
+        print("Continue(Y/\u{001B}[0;32mN\u{001B}[0m): ", terminator: "")
+        guard let input = readLine(), input != "" else { fatalError("Input is incorrect") }
+        guard input == "Y" else { return }
+        
+        var config = FileHelper.share.getServerConfig(serverName)
+        
+        print("User Name(default: \(config.userName!): ", terminator: "")
+        guard var newUserName = readLine() else { fatalError("Can't get input") }
+        if newUserName == "" { newUserName = config.userName! }
+        
+        print("Password(default: \(config.password!): ", terminator: "")
+        guard var newPwd = readLine() else { fatalError("Can't get input") }
+        if newPwd == "" { newPwd = config.password! }
+        
+        guard mathTest() else {
+            print("Calculation error")
+            return
+        }
+        
+        config.userName = newUserName
+        config.password = newPwd
+        
+        FileHelper.share.writeServerConfig(config)
+    }
+    
+    // MARK: - Edit Confih
+    
+    private func editConfig() {
+        // TODO: Edit Config
     }
     
     // MARK: - Tool

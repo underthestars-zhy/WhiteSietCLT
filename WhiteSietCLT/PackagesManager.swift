@@ -11,6 +11,8 @@ import Shout
 class PackagesManager {
     let serverConfig: ServerConfig
     
+    var w = winsize()
+    
     init(_ serverName: String) {
         do {
             guard let serverConfig = ServerConfig(JSONString: try String(contentsOf: FileHelper.share.userServerConfigURL.appendingPathComponent(serverName + ".json"))) else { fatalError("Unable to get server information \(serverName)") }
@@ -20,11 +22,26 @@ class PackagesManager {
         }
     }
     
-    func updatePM(_ showInfo: Bool) {
+    func updatePM(_ showInfo: Bool, isCreatServer: Bool = false) {
         print("Start update package...")
         let id = ProgressHelper.share.creatProgress { self.printPointProgress($0) }
         
         // TODO: Stop use control-c to broke the clt
+        signal(SIGINT, SIG_IGN)
+
+        let sigintSrc = DispatchSource.makeSignalSource(signal: SIGINT, queue: .main)
+        sigintSrc.setEventHandler {
+            ProgressHelper.share.stopProgress(id)
+            ProgressHelper.share.join(id)
+            if isCreatServer {
+                print("Successfully created")
+                self.printSplitLine()
+                exit(0)
+            } else {
+                print("Stop update packages")
+            }
+        }
+        sigintSrc.resume()
         
         do {
             let ssh = try SSH(host: serverConfig.ip, port: serverConfig.port)
@@ -62,9 +79,16 @@ class PackagesManager {
             print(".", terminator: "")
             fflush(stdout)
             sleep(1)
-            print("\u{0008} \u{0008} \u{001B}[1C", terminator: "")
+            print("\u{0008} \u{0008}", terminator: "")
             fflush(stdout)
             ProgressHelper.share.stopWait(id)
+        }
+    }
+    
+    private func printSplitLine(_ text: String = "=") {
+        if ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == 0 {
+            for _ in 0..<w.ws_col { print(text, terminator: "") }
+            print("")
         }
     }
 }
