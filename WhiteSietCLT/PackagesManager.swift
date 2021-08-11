@@ -29,10 +29,12 @@ class PackagesManager {
         // TODO: Stop use control-c to broke the clt
         signal(SIGINT, SIG_IGN)
 
-        let sigintSrc = DispatchSource.makeSignalSource(signal: SIGINT, queue: .main)
+        let sigintSrc = DispatchSource.makeSignalSource(signal: SIGINT, queue: nil)
         sigintSrc.setEventHandler {
             ProgressHelper.share.stopProgress(id)
             ProgressHelper.share.join(id)
+            print("\u{0008} \u{0008}", terminator: "")
+            print("\u{0008} \u{0008}", terminator: "")
             if isCreatServer {
                 print("Successfully created")
                 self.printSplitLine()
