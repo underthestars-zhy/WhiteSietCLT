@@ -49,8 +49,14 @@ class Manager {
         }
     }
     
-    func `open`() {
+    func `open`(with serverName: String) {
+        guard !checkServerNameRepeat(serverName) else { fatalError("Server Name is incorrect") }
         
+        var scheduler = Scheduler(serverName)
+        
+        while let input = readLine(), input.lowercased() != "exit" {
+            parsing(input, scheduler: &scheduler)
+        }
     }
     
     func list(for argument: String) {
@@ -69,7 +75,7 @@ class Manager {
         
         printSplitLine()
         
-        guard var config = ServerConfig() else { fatalError("internal error #2") }
+        var config = ServerConfig()
         
         print("Server Name(*): ", terminator: "")
         guard let serverName = readLine(), serverName != "" else { fatalError("Unavailable: Server Name") }
@@ -234,11 +240,11 @@ class Manager {
         
         var config = FileHelper.share.getServerConfig(serverName)
         
-        print("User Name(default: \(config.userName!): ", terminator: "")
+        print("User Name(default: \(config.userName!)): ", terminator: "")
         guard var newUserName = readLine() else { fatalError("Can't get input") }
         if newUserName == "" { newUserName = config.userName! }
         
-        print("Password(default: \(config.password!): ", terminator: "")
+        print("Password(default: \(config.password!)): ", terminator: "")
         guard var newPwd = readLine() else { fatalError("Can't get input") }
         if newPwd == "" { newPwd = config.password! }
         
@@ -251,12 +257,25 @@ class Manager {
         config.password = newPwd
         
         FileHelper.share.writeServerConfig(config)
+        
+        printSplitLine()
+        print("Done.")
     }
     
     // MARK: - Edit Confih
     
     private func editConfig() {
         // TODO: Edit Config
+    }
+    
+    // MARK: - Parsing instructions
+    
+    private func parsing(_ command: String, scheduler: inout Scheduler) {
+        if command.hasPrefix("::") {
+            // TODO: Use config
+        } else {
+            
+        }
     }
     
     // MARK: - Tool
@@ -284,5 +303,3 @@ class Manager {
         }
     }
 }
-
-

@@ -19,7 +19,7 @@ case .remove:
 case .edit:
     Manager.share.edit(with: CommandLine.arguments[2])
 case .open:
-    Manager.share.open()
+    Manager.share.open(with: CommandLine.arguments[2])
 case .list:
     Manager.share.list(for: CommandLine.arguments[2])
 }

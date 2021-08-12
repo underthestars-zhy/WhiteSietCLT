@@ -18,11 +18,8 @@ struct ServerConfig: Mappable {
     var system: System!
     
     
-    init?(map: Map) { }
-    
-    init?() {
-        self.init(map: Map(mappingType: .fromJSON, JSON: ["version" : Info.serverConfigVersion]))
-    }
+    init?(map: Map) {}
+    init() {}
     
     mutating func mapping(map: Map) {
         version <- map["version"]

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		AC39784826BB799800507B76 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC39784726BB799800507B76 /* main.swift */; };
+		AC5FC25E26C3E958008B3DF7 /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5FC25D26C3E958008B3DF7 /* Scheduler.swift */; };
+		AC5FC26026C3EB89008B3DF7 /* PluginConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5FC25F26C3EB89008B3DF7 /* PluginConfig.swift */; };
 		AC86706526BB7E180057814D /* Shout in Frameworks */ = {isa = PBXBuildFile; productRef = AC86706426BB7E180057814D /* Shout */; };
 		AC86706726BB7F500057814D /* CommandType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC86706626BB7F500057814D /* CommandType.swift */; };
 		AC86706926BB800F0057814D /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC86706826BB800F0057814D /* Manager.swift */; };
@@ -37,6 +39,9 @@
 /* Begin PBXFileReference section */
 		AC39784426BB799700507B76 /* WhiteSietCLT */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WhiteSietCLT; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC39784726BB799800507B76 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		AC5FC25D26C3E958008B3DF7 /* Scheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scheduler.swift; sourceTree = "<group>"; };
+		AC5FC25F26C3EB89008B3DF7 /* PluginConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginConfig.swift; sourceTree = "<group>"; };
+		AC5FC26126C3F18E008B3DF7 /* pm.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = pm.json; sourceTree = "<group>"; };
 		AC86706626BB7F500057814D /* CommandType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandType.swift; sourceTree = "<group>"; };
 		AC86706826BB800F0057814D /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		AC86706A26BB805E0057814D /* Shout */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Shout; path = ../Shout; sourceTree = "<group>"; };
@@ -84,17 +89,28 @@
 		AC39784626BB799700507B76 /* WhiteSietCLT */ = {
 			isa = PBXGroup;
 			children = (
+				AC5FC26226C3F1B7008B3DF7 /* Inner Plugins */,
 				AC39784726BB799800507B76 /* main.swift */,
 				AC86706826BB800F0057814D /* Manager.swift */,
 				ACFE888B26BF746000012CBD /* PackagesManager.swift */,
+				AC5FC25F26C3EB89008B3DF7 /* PluginConfig.swift */,
 				AC86706D26BBA8080057814D /* FileHelper.swift */,
 				AC86706626BB7F500057814D /* CommandType.swift */,
 				AC86706B26BB83EE0057814D /* EexcuteType.swift */,
 				ACEDA85426BCC23900D9C5F3 /* ServerConfig.swift */,
 				ACEDA85626BCC34A00D9C5F3 /* Info.swift */,
 				ACEDA85B26BD7B0300D9C5F3 /* ProgressHelper.swift */,
+				AC5FC25D26C3E958008B3DF7 /* Scheduler.swift */,
 			);
 			path = WhiteSietCLT;
+			sourceTree = "<group>";
+		};
+		AC5FC26226C3F1B7008B3DF7 /* Inner Plugins */ = {
+			isa = PBXGroup;
+			children = (
+				AC5FC26126C3F18E008B3DF7 /* pm.json */,
+			);
+			path = "Inner Plugins";
 			sourceTree = "<group>";
 		};
 		AC86706126BB7D0B0057814D /* Packages */ = {
@@ -182,8 +198,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACFE888C26BF746000012CBD /* PackagesManager.swift in Sources */,
+				AC5FC26026C3EB89008B3DF7 /* PluginConfig.swift in Sources */,
 				AC86706E26BBA8080057814D /* FileHelper.swift in Sources */,
 				AC86706C26BB83EE0057814D /* EexcuteType.swift in Sources */,
+				AC5FC25E26C3E958008B3DF7 /* Scheduler.swift in Sources */,
 				AC39784826BB799800507B76 /* main.swift in Sources */,
 				AC86706926BB800F0057814D /* Manager.swift in Sources */,
 				ACEDA85C26BD7B0300D9C5F3 /* ProgressHelper.swift in Sources */,

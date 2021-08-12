@@ -26,7 +26,6 @@ class PackagesManager {
         print("Start update package...")
         let id = ProgressHelper.share.creatProgress { self.printPointProgress($0) }
         
-        // TODO: Stop use control-c to broke the clt
         signal(SIGINT, SIG_IGN)
 
         let sigintSrc = DispatchSource.makeSignalSource(signal: SIGINT, queue: nil)
@@ -70,6 +69,12 @@ class PackagesManager {
         
         ProgressHelper.share.stopProgress(id)
         ProgressHelper.share.join(id)
+    }
+    
+    // MARK: - Inner Api
+    
+    func listPlugins() -> [PluginConfig] {
+        return []
     }
     
     // MARK: - Tool

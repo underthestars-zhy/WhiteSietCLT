@@ -14,6 +14,7 @@ class FileHelper {
     
     private var _userDataURL: URL?
     private var _userServerConfigURL: URL?
+    private var _userPluginsURL: URL?
     
     var userDataURL: URL {
         get {
@@ -25,6 +26,7 @@ class FileHelper {
                     if !fileManager.fileExists(atPath: dataURL.path) {
                         do {
                             try fileManager.createDirectory(at: dataURL, withIntermediateDirectories: true)
+                            fileManager.createFile(atPath: dataURL.appendingPathComponent("info.json").path, contents: InfoData().toJSONString()?.data(using: .utf8))
                         } catch {
                             fatalError(error.localizedDescription)
                         }
@@ -56,6 +58,29 @@ class FileHelper {
                 
                 _userServerConfigURL = configURL
                 return configURL
+            }
+        }
+    }
+    
+    var userPluginsURL: URL {
+        get {
+            if let _userPluginsURL = _userPluginsURL {
+                return _userPluginsURL
+            } else {
+                let pluginsURL = userDataURL.appendingPathComponent("plugins", isDirectory: true)
+                
+                if !fileManager.fileExists(atPath: pluginsURL.path) {
+                    do {
+                        try fileManager.createDirectory(at: pluginsURL, withIntermediateDirectories: true)
+                        
+                        
+                    } catch {
+                        fatalError(error.localizedDescription)
+                    }
+                }
+                
+                _userPluginsURL = pluginsURL
+                return pluginsURL
             }
         }
     }
