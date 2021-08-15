@@ -12,7 +12,19 @@ struct Info {
     static let version = "1.0.0"
     static let serverConfigVersion = "1.0.0"
     static let pluginConfigVersion = "1"
-    static let innerPlugins = ["pm"]
+    static let innerPluginsFile = [
+        [
+            "pm",
+            #"""
+            {
+                "version": "1.0.0"
+                "name": "pm",
+                "executeName": "pm",
+                "execute": null
+            }
+            """#
+        ]
+    ]
 }
 
 struct InfoData: Mappable {

@@ -73,7 +73,9 @@ class FileHelper {
                     do {
                         try fileManager.createDirectory(at: pluginsURL, withIntermediateDirectories: true)
                         
-                        
+                        for plugin in Info.innerPluginsFile {
+                            fileManager.createFile(atPath: pluginsURL.appendingPathComponent("\(plugin[0]).json").path, contents: plugin[1].data(using: .utf8))
+                        }
                     } catch {
                         fatalError(error.localizedDescription)
                     }

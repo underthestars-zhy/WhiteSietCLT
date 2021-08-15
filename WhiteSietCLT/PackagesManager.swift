@@ -8,7 +8,24 @@
 import Foundation
 import Shout
 
-class PackagesManager {
+class PackagesManager: PluginProtocol {
+    static let arguements: [PluginArguement] = [
+        PluginArguement(index: 0, name: ["install"], must: true)
+    ]
+    
+    static var pluginConfig: [PluginConfig] = {
+        do {
+            var config = [PluginConfig]()
+            for fileName in try FileHelper.fileManager.contentsOfDirectory(atPath: FileHelper.share.userPluginsURL.path) {
+                guard let plugin = PluginConfig(JSONString: try String(contentsOf: FileHelper.share.userPluginsURL.appendingPathComponent(fileName))) else { fatalError("JSON file is corrupted \(fileName)") }
+                config.append(plugin)
+            }
+            return config
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }()
+    
     let serverConfig: ServerConfig
     
     var w = winsize()
@@ -71,10 +88,26 @@ class PackagesManager {
         ProgressHelper.share.join(id)
     }
     
-    // MARK: - Inner Api
+    // MARK: - API
     
-    func listPlugins() -> [PluginConfig] {
-        return []
+    static func getPluginConfig(_ pluginName: String) -> PluginConfig? {
+        for pl in pluginConfig {
+            if pl.executeName == pluginName {
+                return pl
+            }
+        }
+        
+        return nil
+    }
+    
+    static func isInnerPlugin(_ pluginConfig: PluginConfig) -> Bool {
+        for item in Info.innerPluginsFile {
+            if pluginConfig.name == item[0] {
+                return true
+            }
+        }
+        
+        return false
     }
     
     // MARK: - Tool

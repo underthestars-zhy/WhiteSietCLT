@@ -14,9 +14,11 @@ struct Scheduler {
             FileHelper.share.writeServerConfig(newValue)
         }
     }
+    let pm: PackagesManager
     
     init(_ serverName: String) {
         self.serverName = serverName
         self.config = FileHelper.share.getServerConfig(serverName)
+        self.pm = PackagesManager(serverName)
     }
 }

@@ -16,6 +16,7 @@ struct ServerConfig: Mappable {
     var password: String!
     var port: Int32!
     var system: System!
+    var plugins: [String] = []
     
     
     init?(map: Map) {}

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		AC39784826BB799800507B76 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC39784726BB799800507B76 /* main.swift */; };
+		AC450D6826C9388D00430AE6 /* Yams in Frameworks */ = {isa = PBXBuildFile; productRef = AC450D6726C9388D00430AE6 /* Yams */; };
+		AC450D6A26C941DA00430AE6 /* PluginProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC450D6926C941DA00430AE6 /* PluginProtocol.swift */; };
+		AC450D6C26C942CC00430AE6 /* PluginArguement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC450D6B26C942CC00430AE6 /* PluginArguement.swift */; };
 		AC5FC25E26C3E958008B3DF7 /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5FC25D26C3E958008B3DF7 /* Scheduler.swift */; };
 		AC5FC26026C3EB89008B3DF7 /* PluginConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5FC25F26C3EB89008B3DF7 /* PluginConfig.swift */; };
 		AC86706526BB7E180057814D /* Shout in Frameworks */ = {isa = PBXBuildFile; productRef = AC86706426BB7E180057814D /* Shout */; };
@@ -39,9 +42,10 @@
 /* Begin PBXFileReference section */
 		AC39784426BB799700507B76 /* WhiteSietCLT */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WhiteSietCLT; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC39784726BB799800507B76 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		AC450D6926C941DA00430AE6 /* PluginProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginProtocol.swift; sourceTree = "<group>"; };
+		AC450D6B26C942CC00430AE6 /* PluginArguement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginArguement.swift; sourceTree = "<group>"; };
 		AC5FC25D26C3E958008B3DF7 /* Scheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scheduler.swift; sourceTree = "<group>"; };
 		AC5FC25F26C3EB89008B3DF7 /* PluginConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginConfig.swift; sourceTree = "<group>"; };
-		AC5FC26126C3F18E008B3DF7 /* pm.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = pm.json; sourceTree = "<group>"; };
 		AC86706626BB7F500057814D /* CommandType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandType.swift; sourceTree = "<group>"; };
 		AC86706826BB800F0057814D /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		AC86706A26BB805E0057814D /* Shout */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Shout; path = ../Shout; sourceTree = "<group>"; };
@@ -59,6 +63,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACEDA85A26BCC7A500D9C5F3 /* Regex in Frameworks */,
+				AC450D6826C9388D00430AE6 /* Yams in Frameworks */,
 				ACFE889626BFE27A00012CBD /* SwiftRandom in Frameworks */,
 				ACEDA85326BCC21900D9C5F3 /* ObjectMapper in Frameworks */,
 				AC86706526BB7E180057814D /* Shout in Frameworks */,
@@ -89,10 +94,11 @@
 		AC39784626BB799700507B76 /* WhiteSietCLT */ = {
 			isa = PBXGroup;
 			children = (
-				AC5FC26226C3F1B7008B3DF7 /* Inner Plugins */,
 				AC39784726BB799800507B76 /* main.swift */,
 				AC86706826BB800F0057814D /* Manager.swift */,
 				ACFE888B26BF746000012CBD /* PackagesManager.swift */,
+				AC450D6926C941DA00430AE6 /* PluginProtocol.swift */,
+				AC450D6B26C942CC00430AE6 /* PluginArguement.swift */,
 				AC5FC25F26C3EB89008B3DF7 /* PluginConfig.swift */,
 				AC86706D26BBA8080057814D /* FileHelper.swift */,
 				AC86706626BB7F500057814D /* CommandType.swift */,
@@ -103,14 +109,6 @@
 				AC5FC25D26C3E958008B3DF7 /* Scheduler.swift */,
 			);
 			path = WhiteSietCLT;
-			sourceTree = "<group>";
-		};
-		AC5FC26226C3F1B7008B3DF7 /* Inner Plugins */ = {
-			isa = PBXGroup;
-			children = (
-				AC5FC26126C3F18E008B3DF7 /* pm.json */,
-			);
-			path = "Inner Plugins";
 			sourceTree = "<group>";
 		};
 		AC86706126BB7D0B0057814D /* Packages */ = {
@@ -149,6 +147,7 @@
 				ACEDA85226BCC21900D9C5F3 /* ObjectMapper */,
 				ACEDA85926BCC7A500D9C5F3 /* Regex */,
 				ACFE889526BFE27A00012CBD /* SwiftRandom */,
+				AC450D6726C9388D00430AE6 /* Yams */,
 			);
 			productName = WhiteSietCLT;
 			productReference = AC39784426BB799700507B76 /* WhiteSietCLT */;
@@ -182,6 +181,7 @@
 				ACEDA85126BCC21900D9C5F3 /* XCRemoteSwiftPackageReference "ObjectMapper" */,
 				ACEDA85826BCC7A500D9C5F3 /* XCRemoteSwiftPackageReference "Regex" */,
 				ACFE889426BFE27A00012CBD /* XCRemoteSwiftPackageReference "SwiftRandom" */,
+				AC450D6626C9388D00430AE6 /* XCRemoteSwiftPackageReference "Yams" */,
 			);
 			productRefGroup = AC39784526BB799700507B76 /* Products */;
 			projectDirPath = "";
@@ -201,7 +201,9 @@
 				AC5FC26026C3EB89008B3DF7 /* PluginConfig.swift in Sources */,
 				AC86706E26BBA8080057814D /* FileHelper.swift in Sources */,
 				AC86706C26BB83EE0057814D /* EexcuteType.swift in Sources */,
+				AC450D6A26C941DA00430AE6 /* PluginProtocol.swift in Sources */,
 				AC5FC25E26C3E958008B3DF7 /* Scheduler.swift in Sources */,
+				AC450D6C26C942CC00430AE6 /* PluginArguement.swift in Sources */,
 				AC39784826BB799800507B76 /* main.swift in Sources */,
 				AC86706926BB800F0057814D /* Manager.swift in Sources */,
 				ACEDA85C26BD7B0300D9C5F3 /* ProgressHelper.swift in Sources */,
@@ -375,6 +377,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AC450D6626C9388D00430AE6 /* XCRemoteSwiftPackageReference "Yams" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jpsim/Yams";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		ACEDA85126BCC21900D9C5F3 /* XCRemoteSwiftPackageReference "ObjectMapper" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/tristanhimmelman/ObjectMapper";
@@ -402,6 +412,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AC450D6726C9388D00430AE6 /* Yams */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC450D6626C9388D00430AE6 /* XCRemoteSwiftPackageReference "Yams" */;
+			productName = Yams;
+		};
 		AC86706426BB7E180057814D /* Shout */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Shout;

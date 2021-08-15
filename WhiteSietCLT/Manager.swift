@@ -52,6 +52,8 @@ class Manager {
     func `open`(with serverName: String) {
         guard !checkServerNameRepeat(serverName) else { fatalError("Server Name is incorrect") }
         
+        self.printSplitLine()
+        
         var scheduler = Scheduler(serverName)
         
         while let input = readLine(), input.lowercased() != "exit" {
@@ -274,7 +276,21 @@ class Manager {
         if command.hasPrefix("::") {
             // TODO: Use config
         } else {
+            let arguements = command.split(separator: " ")
+            guard arguements.count > 0 else { return }
             
+            guard let firstArguement = arguements.first else { fatalError("Cannot get plugin name") }
+            let pluginName = String(firstArguement)
+            guard let pluginConfig = PackagesManager.getPluginConfig(pluginName) else {
+                print("\(pluginName) is not find!")
+                return
+            }
+            
+            if PackagesManager.isInnerPlugin(pluginConfig) {
+                
+            } else {
+                // TODO: Use execute
+            }
         }
     }
     
